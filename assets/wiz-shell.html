@@ -1,0 +1,56 @@
+<!-- assets/shell.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Shell</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Shell</h1>
+    <form id="shellForm">
+        <input type="text" id="commandInput" placeholder="Enter command" required />
+        <input type="submit" value="Run Command" />
+    </form>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById("shellForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var command = document.getElementById("commandInput").value;
+            fetch("/interactive-shell?cmd=" + encodeURIComponent(command))
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById("output").textContent = "Error: " + data.error + "\n" + data.output;
+                    } else {
+                        document.getElementById("output").textContent = data.output;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("output").textContent = "Request failed: " + error;
+                });
+        });
+    </script>
+</body>
+</html>

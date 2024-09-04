@@ -2,6 +2,9 @@
 A Dockerfile has been provided to run this application.  The default port exposed is 8080.
 
 # Environment Variables
+Added /assets/wizexercise.txt file for WIZ Exercise
+
+# Environment Variables
 The following environment variables are needed.
 |Variable|Purpose|example|
 |---|---|---|
