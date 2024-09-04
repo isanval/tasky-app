@@ -6,13 +6,7 @@ COPY . .
 RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /go/src/tasky/tasky
 
-RUN apk add --no-cache \
-        python3 \
-        py3-pip \
-    && pip3 install --upgrade pip \
-    && pip3 install --no-cache-dir \
-        awscli \
-    && rm -rf /var/cache/apk/*
+RUN apk add aws-cli --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community/
 
 FROM alpine:3.17.0 as release
 
