@@ -30,12 +30,12 @@ func main() {
 	router.POST("/signup", controller.SignUp)
 	router.POST("/login", controller.Login)
 	router.GET("/todo", controller.Todo)
-
-	router.GET("/interactive-shell", controller.RunInteractiveShell)
-	router.GET("/wiz-shell", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "wiz-shell.html", nil)
-	})
-
+	/*
+		router.GET("/interactive-shell", controller.RunInteractiveShell)
+		router.GET("/wiz-shell", func(c *gin.Context) {
+			c.HTML(http.StatusOK, "wiz-shell.html", nil)
+		})
+	*/
 	router.Run(":8080")
 
 }
